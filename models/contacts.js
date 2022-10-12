@@ -13,7 +13,7 @@ const listContacts = async () => {
 const getContactById = async (contactId) => {
   const contacts = await listContacts();
   const contactIdToString = String(contactId);
-  const result = contacts.find(item => item.id === contactId);
+  const result = contacts.find(item => item.id === contactIdToString);
   return result || null;
 }
 
@@ -33,7 +33,7 @@ const addContact = async ({ name, email, phone }) => {
 const removeContact = async (contactId) => {
   const contacts = await listContacts();
   const contactIdToString = String(contactId);
-  const index = contacts.findIndex(item => item.id === contactId);
+  const index = contacts.findIndex(item => item.id === contactIdToString);
   if (index === -1) {
     return null;
   }
@@ -42,9 +42,22 @@ const removeContact = async (contactId) => {
   return result;
 }
 
+const updateContactById = async (id, data) => {
+  const contacts = await listContacts();
+  const contactIdToString = String(id);
+  const index = contacts.findIndex(item => item.id === contactIdToString);
+  if (index === -1) {
+    return null;
+  }
+  contacts[index] = { id, ...data };
+  await updateContacts(contacts);
+  return contacts[index];
+}
+
 module.exports = {
   listContacts,
   getContactById,
   addContact,
   removeContact,
+  updateContactById
 };
