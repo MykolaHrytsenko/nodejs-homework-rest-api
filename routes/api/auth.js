@@ -6,8 +6,11 @@ const { schemas } = require("../../models/user")
 
 const router = express.Router()
 
-// singup
+// signup
 router.post("/register", validateBody(schemas.registerSchema), ctrlWrapper(ctrl.register))
+
+// signin
+router.post("/login", validateBody(schemas.loginSchema), ctrlWrapper(ctrl.login))
 
 module.exports = router;
 
