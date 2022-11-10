@@ -1,11 +1,11 @@
 const { User } = require("../../models/user");
-const { RequestError, sendEmail, createVerifyEmail } = ("../../helpers");
+const { RequestError, sendMail, createVerifyEmail } = require("../../helpers");
 
 const resendEmail = async (req, res) => {
     const { email } = req.body;
     const user = await User.findOne({ email });
     if (!user) {
-        throw RequestError(404)
+        throw RequestError(404, "missing required field email")
     }
 
     if (user.verify) {
@@ -14,13 +14,11 @@ const resendEmail = async (req, res) => {
 
     const mail = createVerifyEmail(email, user.verificationToken);
 
-    await sendEmail(mail);
+    await sendMail(mail);
 
     res.json({
         message: "Verification email sent"
     })
-
-
 }
 
 module.exports = resendEmail;
