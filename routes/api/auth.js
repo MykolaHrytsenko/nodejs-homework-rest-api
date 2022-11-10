@@ -1,10 +1,10 @@
-const express = require("express")
-const ctrl = require("../../controllers/auth")
-const { ctrlWrapper } = require("../../helpers")
-const { validateBody, authenticate, upload } = require("../../middlewares")
-const { schemas } = require("../../models/user")
+const express = require("express");
+const ctrl = require("../../controllers/auth");
+const { ctrlWrapper } = require("../../helpers");
+const { validateBody, authenticate, upload } = require("../../middlewares");
+const { schemas } = require("../../models/user");
 
-const router = express.Router()
+const router = express.Router();
 
 
 router.post("/register", validateBody(schemas.registerSchema), ctrlWrapper(ctrl.register))

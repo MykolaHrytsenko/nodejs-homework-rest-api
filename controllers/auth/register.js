@@ -1,7 +1,7 @@
-const bcrypt = require("bcryptjs")
-const gravatar = require("gravatar")
-const { User } = require("../../models/user")
-const { RequestError } = require("../../helpers")
+const bcrypt = require("bcryptjs");
+const gravatar = require("gravatar");
+const { User } = require("../../models/user");
+const { RequestError } = require("../../helpers");
 
 const register = async (req, res) => {
     const { name, email, password, subscription } = req.body;
